@@ -34,3 +34,6 @@
 #folders
 /build
 /.vs
+
+#visual studio
+*.sln
