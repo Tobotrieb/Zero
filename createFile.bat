@@ -3,8 +3,6 @@
 set /p project="Enter Project Name: "
 set /p filepath="Enter path (without last "\"): "
 
-echo %filepath%
-
 if not "%filepath%"=="." (
 	set realfilepath=\%filepath%
 	set filepath=/%filepath%
