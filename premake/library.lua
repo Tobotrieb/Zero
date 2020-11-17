@@ -1,10 +1,11 @@
 
 libraries = {}
 
-function library(name, link_against)
+--library(("StaticLib" | "SharedLib"), "Name", {"OtherLib", "AnotherLib"}, "BUILD_DLL")
+function library(libtype, name, link_against, external_defines)
 	group("Libraries")
 	project(name)
-		kind("StaticLib")
+		kind(libtype)
 		location("build")
 		targetdir("lib")
 		files({
@@ -15,12 +16,8 @@ function library(name, link_against)
 		includedirs("include")
 		
 		links(link_against)
-		filter {"system:windows"}
-			links("OpenGL32")
 		
-		filter {"system:not windows"}
-			links("GL")
-		filter{}
+		defines(external_defines)
 	
 	table.insert(libraries, name)
 end

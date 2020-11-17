@@ -2,14 +2,11 @@ require "premake/library"
 
 applications = {}
 
-function application(name)
+--application(("ConsoleApp" | "WindowedApp"), "Name", ({"OtherLib", "AnotherLib"} | libraries), {"USE_DLL",})
+function application(apptype, name, link_against, external_defines)
 	group("Applications")
 	project(name)
-		filter {"configurations:Debug"}
-			kind("ConsoleApp")
-		filter {"configurations:Release"}
-			kind("WindowedApp")
-		filter {}
+		kind(apptype)
 		location("build")
 		targetdir("bin/%{prj.name}/%{cfg.longname}_%{cfg.architecture}")
 		files({
@@ -19,7 +16,9 @@ function application(name)
 		})
 		includedirs("include")
 		
-		links(libraries)
+		links(link_against)
+		
+		defines(external_defines)
 	
 	table.insert(applications, name)
 end

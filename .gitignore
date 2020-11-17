@@ -32,6 +32,9 @@
 *.app
 
 #folders
+/bin
+/bin-int
+/lib
 /build
 /.vs
 
